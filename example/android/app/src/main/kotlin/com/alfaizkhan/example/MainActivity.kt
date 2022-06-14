@@ -1,4 +1,4 @@
-package com.alfaizkhan.emoji_selector
+package com.alfaizkhan.example
 
 import io.flutter.embedding.android.FlutterActivity
 

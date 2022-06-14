@@ -2,15 +2,17 @@ import 'package:emoji_selector/emoji_selector.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Emoji Keyboard',
+      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -20,52 +22,52 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blue,
       ),
       themeMode: ThemeMode.system,
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  MyHomePageState createState() => MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> {
   var _emojiData;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Emojis'),
+        title: const Text('Emojis Selector Example'),
       ),
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              child: Text(
-                _emojiData == null
-                    ? 'No emoji selected'
-                    : 'Selected ${_emojiData.char}',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontFamily: 'Apple Color Emoji',
-                ),
-              ),
-              padding: EdgeInsets.only(
-                top: 30,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 30,
+            ),
+            child: Text(
+              _emojiData == null
+                  ? 'No emoji selected'
+                  : 'Selected ${_emojiData.char}',
+              style: const TextStyle(
+                fontSize: 24,
+                fontFamily: 'Apple Color Emoji',
               ),
             ),
-            EmojiSelector(
-              onSelected: (emoji) {
-                setState(() {
-                  _emojiData = emoji;
-                });
-              },
-            ),
-          ],
-        ),
+          ),
+          EmojiSelector(
+            onSelected: (emoji) {
+              setState(() {
+                _emojiData = emoji;
+              });
+            },
+          ),
+        ],
       ),
     );
   }
