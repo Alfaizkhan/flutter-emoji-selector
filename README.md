@@ -10,7 +10,7 @@ Emoji Selector is an emoji picker component for Flutter.
 Declare dependency in your `pubspec.yaml`
 ```yaml
 dependencies:
-    emoji_selector: ^0.0.1
+    emoji_selector: ^0.0.2
 ```
 
 You can then easily embed the Emoji Selector Widget anywhere in your application:
