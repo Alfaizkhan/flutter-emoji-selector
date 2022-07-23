@@ -1,3 +1,7 @@
+## 0.0.3
+
+* Minor Fixes in example
+
 ## 0.0.2
 
 * Minor Fixes
