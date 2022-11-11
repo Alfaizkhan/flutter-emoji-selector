@@ -46,21 +46,21 @@ class MyHomePageState extends State<MyHomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          // Padding(
-          //   padding: const EdgeInsets.only(
-          //     top: 30,
-          //   ),
-          //   child: Text(
-          //     emojiData.id == null
-          //         ? 'No emoji selected'
-          //         : 'Selected Emoji: ${emojiData.char}',
-          //     style: const TextStyle(
-          //       color: Colors.black12,
-          //       fontSize: 24,
-          //       fontFamily: 'Apple Color Emoji',
-          //     ),
-          //   ),
-          // ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 30,
+            ),
+            child: Text(
+              emojiData.id == null
+                  ? 'No emoji selected'
+                  : 'Selected Emoji: ${emojiData.char}',
+              style: const TextStyle(
+                color: Colors.black12,
+                fontSize: 24,
+                fontFamily: 'Apple Color Emoji',
+              ),
+            ),
+          ),
           EmojiSelector(
             padding: const EdgeInsets.all(20),
             onSelected: (emoji) {
