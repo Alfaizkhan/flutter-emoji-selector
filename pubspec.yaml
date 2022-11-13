@@ -3,7 +3,7 @@ homepage: https://github.com/Alfaizkhan/flutter-emoji-selector
 issue_tracker: https://github.com/Alfaizkhan/flutter-emoji-selector/issues
 description: An Emoji picker component for Flutter with the latest set of emojis. The current version supports Emoji version 13.
 repository: https://github.com/Alfaizkhan/flutter-emoji_selector
-version: 0.0.3
+version: 0.0.4
 
 environment:
   sdk: ">=2.17.3 <3.0.0"

@@ -1,3 +1,10 @@
+## 0.0.4
+
+* Fix selector group name.
+* Add custom padding.
+* Add custom title.
+
+
 ## 0.0.3
 
 * Minor Fixes in example
