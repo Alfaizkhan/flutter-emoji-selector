@@ -15,12 +15,16 @@ import 'package:flutter/services.dart' show rootBundle;
 class EmojiSelector extends StatefulWidget {
   final int columns;
   final int rows;
+  final EdgeInsets padding;
+  final bool withTitle;
   final Function(EmojiData) onSelected;
 
   const EmojiSelector({
     Key? key,
     this.columns = 10,
     this.rows = 5,
+    this.padding = EdgeInsets.zero,
+    this.withTitle = true,
     required this.onSelected,
   }) : super(key: key);
 
@@ -42,8 +46,8 @@ class _EmojiSelectorState extends State<EmojiSelector> {
     Category.animals: Group(
       Category.animals,
       CategoryIcons.animalIcon,
-      'animals & Nature',
-      ['animals & Nature'],
+      'Animals & Nature',
+      ['Animals & Nature'],
     ),
     Category.foods: Group(
       Category.foods,
@@ -55,31 +59,31 @@ class _EmojiSelectorState extends State<EmojiSelector> {
       Category.activities,
       CategoryIcons.activityIcon,
       'Activity',
-      ['activities'],
+      ['Activities'],
     ),
     Category.travel: Group(
       Category.travel,
       CategoryIcons.travelIcon,
-      'travel & Places',
-      ['travel & Places'],
+      'Travel & Places',
+      ['Travel & Places'],
     ),
     Category.objects: Group(
       Category.objects,
       CategoryIcons.objectIcon,
-      'objects',
-      ['objects'],
+      'Objects',
+      ['Objects'],
     ),
     Category.symbols: Group(
       Category.symbols,
       CategoryIcons.symbolIcon,
-      'symbols',
-      ['symbols'],
+      'Symbols',
+      ['Symbols'],
     ),
     Category.flags: Group(
       Category.flags,
       CategoryIcons.flagIcon,
-      'flags',
-      ['flags'],
+      'Flags',
+      ['Flags'],
     ),
   };
   List<Category> order = [
@@ -209,93 +213,84 @@ class _EmojiSelectorState extends State<EmojiSelector> {
       }),
     );
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(
-            10.0,
-            10.0,
-            10.0,
-            4.0,
+    return Container(
+      padding: widget.padding,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (widget.withTitle)
+            Text(
+              selectedGroup.title.toUpperCase(),
+              style: TextStyle(fontSize: 12),
+            ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: (MediaQuery.of(context).size.width / widget.columns) *
+                widget.rows,
+            child: PageView(
+              pageSnapping: true,
+              controller: pageController,
+              onPageChanged: (index) {
+                if (index < smileysNum) {
+                  selectedCategory = Category.smileys;
+                } else if (index < smileysNum + animalsNum) {
+                  selectedCategory = Category.animals;
+                } else if (index < smileysNum + animalsNum + foodsNum) {
+                  selectedCategory = Category.foods;
+                } else if (index <
+                    smileysNum + animalsNum + foodsNum + activitiesNum) {
+                  selectedCategory = Category.activities;
+                } else if (index <
+                    smileysNum +
+                        animalsNum +
+                        foodsNum +
+                        activitiesNum +
+                        travelNum) {
+                  selectedCategory = Category.travel;
+                } else if (index <
+                    smileysNum +
+                        animalsNum +
+                        foodsNum +
+                        activitiesNum +
+                        travelNum +
+                        objectsNum) {
+                  selectedCategory = Category.objects;
+                } else if (index <
+                    smileysNum +
+                        animalsNum +
+                        foodsNum +
+                        activitiesNum +
+                        travelNum +
+                        objectsNum +
+                        symbolsNum) {
+                  selectedCategory = Category.symbols;
+                } else if (index <
+                    smileysNum +
+                        animalsNum +
+                        foodsNum +
+                        activitiesNum +
+                        travelNum +
+                        objectsNum +
+                        symbolsNum +
+                        flagsNum) {
+                  selectedCategory = Category.flags;
+                }
+              },
+              children: pages,
+            ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                selectedGroup.title.toUpperCase(),
-                style: TextStyle(
-                  color: Theme.of(context).primaryTextTheme.caption!.color,
-                  fontSize: 12,
-                ),
+          SizedBox(
+            /* Category PICKER */
+            height: 50,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Row(
+                children: selectors,
               ),
-            ],
+            ),
           ),
-        ),
-        SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: (MediaQuery.of(context).size.width / widget.columns) *
-              widget.rows,
-          child: PageView(
-            pageSnapping: true,
-            controller: pageController,
-            onPageChanged: (index) {
-              if (index < smileysNum) {
-                selectedCategory = Category.smileys;
-              } else if (index < smileysNum + animalsNum) {
-                selectedCategory = Category.animals;
-              } else if (index < smileysNum + animalsNum + foodsNum) {
-                selectedCategory = Category.foods;
-              } else if (index <
-                  smileysNum + animalsNum + foodsNum + activitiesNum) {
-                selectedCategory = Category.activities;
-              } else if (index <
-                  smileysNum +
-                      animalsNum +
-                      foodsNum +
-                      activitiesNum +
-                      travelNum) {
-                selectedCategory = Category.travel;
-              } else if (index <
-                  smileysNum +
-                      animalsNum +
-                      foodsNum +
-                      activitiesNum +
-                      travelNum +
-                      objectsNum) {
-                selectedCategory = Category.objects;
-              } else if (index <
-                  smileysNum +
-                      animalsNum +
-                      foodsNum +
-                      activitiesNum +
-                      travelNum +
-                      objectsNum +
-                      symbolsNum) {
-                selectedCategory = Category.symbols;
-              } else if (index <
-                  smileysNum +
-                      animalsNum +
-                      foodsNum +
-                      activitiesNum +
-                      travelNum +
-                      objectsNum +
-                      symbolsNum +
-                      flagsNum) {
-                selectedCategory = Category.flags;
-              }
-            },
-            children: pages,
-          ),
-        ),
-        SizedBox(
-          /* Category PICKER */
-          height: 50,
-          child: Row(
-            children: selectors,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
