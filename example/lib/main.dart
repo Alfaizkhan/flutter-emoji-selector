@@ -62,6 +62,7 @@ class MyHomePageState extends State<MyHomePage> {
             ),
           ),
           EmojiSelector(
+            padding: const EdgeInsets.all(20),
             onSelected: (emoji) {
               setState(() {
                 emojiData = emoji;
