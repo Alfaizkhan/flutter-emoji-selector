@@ -35,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class MyHomePageState extends State<MyHomePage> {
-  late EmojiData emojiData;
+  EmojiData? emojiData;
 
   @override
   Widget build(BuildContext context) {
@@ -51,11 +51,10 @@ class MyHomePageState extends State<MyHomePage> {
               top: 30,
             ),
             child: Text(
-              emojiData.id == null
+              emojiData?.id == null
                   ? 'No emoji selected'
-                  : 'Selected Emoji: ${emojiData.char}',
+                  : 'Selected Emoji: ${emojiData?.char}',
               style: const TextStyle(
-                color: Colors.black12,
                 fontSize: 24,
                 fontFamily: 'Apple Color Emoji',
               ),
