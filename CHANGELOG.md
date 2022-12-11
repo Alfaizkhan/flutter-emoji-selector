@@ -1,3 +1,7 @@
+## 0.0.5
+
+* Add search feature
+
 ## 0.0.4
 
 * Fix selector group name.
