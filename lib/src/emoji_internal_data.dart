@@ -14,6 +14,7 @@ class EmojiInternalData {
   String? unified;
   String? nonQualified;
   String? category;
+  String? shortName;
   int? sortOrder;
   bool? hasApple;
   bool? hasGoogle;
@@ -42,6 +43,7 @@ class EmojiInternalData {
     unified = jsonData['unified'];
     nonQualified = jsonData['non_qualified'];
     category = jsonData['category'];
+    shortName = jsonData['short_name'];
     sortOrder = jsonData['sort_order'];
     hasApple = jsonData['has_img_apple'];
     hasGoogle = jsonData['has_img_google'];

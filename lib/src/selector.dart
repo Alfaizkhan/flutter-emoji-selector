@@ -33,7 +33,9 @@ class EmojiSelector extends StatefulWidget {
 }
 
 class _EmojiSelectorState extends State<EmojiSelector> {
+  TextEditingController _controller = TextEditingController();
   Category selectedCategory = Category.smileys;
+  List<EmojiInternalData> _emojiSearch = [];
 
   final List<EmojiInternalData> _emojis = [];
   final Map<Category, Group> _groups = {
@@ -218,6 +220,31 @@ class _EmojiSelectorState extends State<EmojiSelector> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(
+            height: 30.0,
+            child: TextField(
+              controller: _controller,
+              onChanged: searchEmoji,
+              cursorColor: Colors.grey,
+              style: TextStyle(fontSize: 12),
+              decoration: InputDecoration(
+                isDense: true,
+                contentPadding: EdgeInsets.zero,
+                fillColor: Colors.white,
+                filled: true,
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide.none),
+                hintText: 'Search Emoji',
+                hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
+                prefixIcon: Container(
+                  child: Icon(Icons.search),
+                  width: 18,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 5),
           if (widget.withTitle)
             Text(
               selectedGroup.title.toUpperCase(),
@@ -227,68 +254,87 @@ class _EmojiSelectorState extends State<EmojiSelector> {
             width: MediaQuery.of(context).size.width,
             height: (MediaQuery.of(context).size.width / widget.columns) *
                 widget.rows,
-            child: PageView(
-              pageSnapping: true,
-              controller: pageController,
-              onPageChanged: (index) {
-                if (index < smileysNum) {
-                  selectedCategory = Category.smileys;
-                } else if (index < smileysNum + animalsNum) {
-                  selectedCategory = Category.animals;
-                } else if (index < smileysNum + animalsNum + foodsNum) {
-                  selectedCategory = Category.foods;
-                } else if (index <
-                    smileysNum + animalsNum + foodsNum + activitiesNum) {
-                  selectedCategory = Category.activities;
-                } else if (index <
-                    smileysNum +
-                        animalsNum +
-                        foodsNum +
-                        activitiesNum +
-                        travelNum) {
-                  selectedCategory = Category.travel;
-                } else if (index <
-                    smileysNum +
-                        animalsNum +
-                        foodsNum +
-                        activitiesNum +
-                        travelNum +
-                        objectsNum) {
-                  selectedCategory = Category.objects;
-                } else if (index <
-                    smileysNum +
-                        animalsNum +
-                        foodsNum +
-                        activitiesNum +
-                        travelNum +
-                        objectsNum +
-                        symbolsNum) {
-                  selectedCategory = Category.symbols;
-                } else if (index <
-                    smileysNum +
-                        animalsNum +
-                        foodsNum +
-                        activitiesNum +
-                        travelNum +
-                        objectsNum +
-                        symbolsNum +
-                        flagsNum) {
-                  selectedCategory = Category.flags;
-                }
-              },
-              children: pages,
-            ),
+            child: (_emojiSearch.isNotEmpty && _controller.text.isNotEmpty)
+                ? EmojiPage(
+                    rows: widget.rows,
+                    columns: widget.columns,
+                    skin: _skin,
+                    emojis: _emojiSearch,
+                    onSelected: (internalData) {
+                      EmojiData emoji = EmojiData(
+                        id: internalData.id,
+                        name: internalData.name,
+                        unified: internalData.unifiedForSkin(_skin),
+                        char: internalData.charForSkin(_skin),
+                        category: internalData.category,
+                        skin: _skin,
+                      );
+                      widget.onSelected(emoji);
+                    },
+                  )
+                : PageView(
+                    pageSnapping: true,
+                    controller: pageController,
+                    onPageChanged: (index) {
+                      if (index < smileysNum) {
+                        selectedCategory = Category.smileys;
+                      } else if (index < smileysNum + animalsNum) {
+                        selectedCategory = Category.animals;
+                      } else if (index < smileysNum + animalsNum + foodsNum) {
+                        selectedCategory = Category.foods;
+                      } else if (index <
+                          smileysNum + animalsNum + foodsNum + activitiesNum) {
+                        selectedCategory = Category.activities;
+                      } else if (index <
+                          smileysNum +
+                              animalsNum +
+                              foodsNum +
+                              activitiesNum +
+                              travelNum) {
+                        selectedCategory = Category.travel;
+                      } else if (index <
+                          smileysNum +
+                              animalsNum +
+                              foodsNum +
+                              activitiesNum +
+                              travelNum +
+                              objectsNum) {
+                        selectedCategory = Category.objects;
+                      } else if (index <
+                          smileysNum +
+                              animalsNum +
+                              foodsNum +
+                              activitiesNum +
+                              travelNum +
+                              objectsNum +
+                              symbolsNum) {
+                        selectedCategory = Category.symbols;
+                      } else if (index <
+                          smileysNum +
+                              animalsNum +
+                              foodsNum +
+                              activitiesNum +
+                              travelNum +
+                              objectsNum +
+                              symbolsNum +
+                              flagsNum) {
+                        selectedCategory = Category.flags;
+                      }
+                    },
+                    children: pages,
+                  ),
           ),
-          SizedBox(
-            /* Category PICKER */
-            height: 50,
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Row(
-                children: selectors,
+          if (_emojiSearch.isEmpty && _controller.text.isEmpty)
+            SizedBox(
+              /* Category PICKER */
+              height: 50,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Row(
+                  children: selectors,
+                ),
               ),
             ),
-          ),
         ],
       ),
     );
@@ -326,6 +372,15 @@ class _EmojiSelectorState extends State<EmojiSelector> {
     }
     setState(() {
       _loaded = true;
+    });
+  }
+
+  void searchEmoji(String text) {
+    List<EmojiInternalData> newEmojis = _emojis.where((element) {
+      return element.shortName!.toLowerCase().contains(text);
+    }).toList();
+    setState(() {
+      _emojiSearch = newEmojis;
     });
   }
 }
