@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+/// Skin tones color
 class SkinTones {
   static const tone1 = Color.fromRGBO(255, 201, 58, 1);
   static const tone2 = Color.fromRGBO(250, 220, 188, 1);

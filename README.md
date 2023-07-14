@@ -13,7 +13,7 @@ Emoji Selector is an emoji picker component for Flutter.
 Declare dependency in your `pubspec.yaml`
 ```yaml
 dependencies:
-    emoji_selector: ^0.0.5
+    emoji_selector: ^0.0.6
 ```
 
 You can then easily embed the Emoji Selector Widget anywhere in your application:
@@ -50,8 +50,8 @@ You can use a modal sheet to simulate a keyboard.
 return showModalBottomSheet(
     context: context,
     builder: (BuildContext subcontext) {
-        return Container(
-        height: 266,
+        return SizedBox(
+        height: 256,
         child: EmojiSelector(
             onSelected: (emoji) {
             Navigator.of(subcontext).pop(emoji);

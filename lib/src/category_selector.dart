@@ -1,6 +1,7 @@
 import 'package:emoji_selector/src/category_icon.dart';
 import 'package:flutter/material.dart';
 
+/// Category selector
 class CategorySelector extends StatelessWidget {
   final bool selected;
   final CategoryIcon icon;

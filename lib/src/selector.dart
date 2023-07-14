@@ -221,7 +221,7 @@ class _EmojiSelectorState extends State<EmojiSelector> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 30.0,
+            height: 32.0,
             child: TextField(
               controller: _controller,
               onChanged: searchEmoji,
@@ -230,7 +230,6 @@ class _EmojiSelectorState extends State<EmojiSelector> {
               decoration: InputDecoration(
                 isDense: true,
                 contentPadding: EdgeInsets.zero,
-                fillColor: Colors.white,
                 filled: true,
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -239,12 +238,12 @@ class _EmojiSelectorState extends State<EmojiSelector> {
                 hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
                 prefixIcon: Container(
                   child: Icon(Icons.search),
-                  width: 18,
+                  width: 16,
                 ),
               ),
             ),
           ),
-          SizedBox(height: 5),
+          SizedBox(height: 4),
           if (widget.withTitle)
             Text(
               selectedGroup.title.toUpperCase(),
@@ -324,7 +323,7 @@ class _EmojiSelectorState extends State<EmojiSelector> {
                     children: pages,
                   ),
           ),
-          if (_emojiSearch.isEmpty && _controller.text.isEmpty)
+          if (_controller.text.isEmpty)
             SizedBox(
               /* Category PICKER */
               height: 50,

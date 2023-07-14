@@ -1,3 +1,4 @@
+/// Data member class for selecting the data
 class EmojiData {
   final String? id;
   final String? name;

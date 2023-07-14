@@ -47,25 +47,24 @@ class MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(
-              top: 30,
-            ),
+            padding: const EdgeInsets.only(top: 30),
             child: Text(
               emojiData?.id == null
                   ? 'No emoji selected'
                   : 'Selected Emoji: ${emojiData?.char}',
               style: const TextStyle(
                 fontSize: 24,
-                fontFamily: 'Apple Color Emoji',
               ),
             ),
           ),
           EmojiSelector(
             padding: const EdgeInsets.all(20),
             onSelected: (emoji) {
-              setState(() {
-                emojiData = emoji;
-              });
+              setState(
+                () {
+                  emojiData = emoji;
+                },
+              );
             },
           ),
         ],

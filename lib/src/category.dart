@@ -1,3 +1,4 @@
+/// Category of the emojis
 enum Category {
   smileys,
   animals,

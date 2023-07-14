@@ -28,7 +28,7 @@ class _SkinToneState extends State<SkinToneSelector> {
           _overlayEntry.remove();
         } else {
           _overlayEntry = createOverlay(context);
-          Overlay.of(context)!.insert(_overlayEntry);
+          Overlay.of(context).insert(_overlayEntry);
         }
         setState(() {
           _expanded = !_expanded;

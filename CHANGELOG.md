@@ -1,6 +1,12 @@
+## 0.0.6
+
+* Added support for Emoji version 15.0
+* Minor Fixes.
+
 ## 0.0.5
 
 * Add search feature
+* Minor Fixes.
 
 ## 0.0.4
 
