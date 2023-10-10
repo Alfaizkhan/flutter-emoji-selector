@@ -16,6 +16,15 @@ dependencies:
     emoji_selector: ^0.0.6
 ```
 
+[Optional] If you need support for Plattfroms that don't have the `Apple Color Emoji` font installed (e.g. Linux, Web, ...), download Noto Emoji Font from https://github.com/googlefonts/noto-emoji) and add it to your `pubspec.yaml`:
+```yaml
+flutter:
+  fonts:
+    - family: Noto Emoji
+      fonts:
+        - asset: fonts/NotoEmoji/NotoEmoji.ttf
+```
+
 You can then easily embed the Emoji Selector Widget anywhere in your application:
 ```dart
 EmojiSelector(
