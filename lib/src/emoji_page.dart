@@ -39,6 +39,7 @@ class EmojiPage extends StatelessWidget {
                       fontSize: 24.0,
                       fontFamily:
                           'Apple Color Emoji', // Investigate what to use on other platforms
+                      fontFamilyFallback: ["Noto Emoji"],
                     ),
                   ),
                 ),
